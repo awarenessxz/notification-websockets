@@ -1,6 +1,6 @@
 package com.example.notification.model
 
 data class TopicResponse(
-        val apiTopics: List<String>,
-        val appTopics: List<String>
+        val toClientTopics: List<String>,
+        val toServerTopics: List<String>
 )

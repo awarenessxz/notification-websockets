@@ -1,8 +1,8 @@
 package com.example.notification.controller
 
-import com.example.notification.model.ApiMessage
-import com.example.notification.model.ApiTopic
-import com.example.notification.model.AppTopic
+import com.example.notification.enum.ToClientTopic
+import com.example.notification.enum.ToServerTopic
+import com.example.notification.model.ToClientMessage
 import com.example.notification.model.TopicResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.*
 class NotificationController(private val template: SimpMessagingTemplate) {
     @GetMapping("/topics")
     fun getAllTopics(): ResponseEntity<TopicResponse> {
-        val response = TopicResponse(apiTopics = ApiTopic.getTopics(), appTopics = AppTopic.getTopics())
+        val response = TopicResponse(toClientTopics = ToClientTopic.getTopics(), toServerTopics = ToServerTopic.getTopics())
         return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
-    fun newTopicMessage(@RequestBody message: ApiMessage) {
-        template.convertAndSend("/topic/${message.topic.label}", message.payload)
+    fun newTopicMessage(@RequestBody message: ToClientMessage) {
+        template.convertAndSend(message.topic.destination, message.payload)
     }
 }

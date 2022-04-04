@@ -1,11 +1,11 @@
-package com.example.notification.model
+package com.example.notification.enum
 
 /*
  * Topics from External Service to Backend to Frontend
  */
 
-enum class ApiTopic(val label: String) {
-    TOAST_MESSAGE("toast");
+enum class ToClientTopic(val destination: String) {
+    TOAST_MESSAGE("/topic/toast_message");
 
     companion object {
         fun getTopics(): List<String> {

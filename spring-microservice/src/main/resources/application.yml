@@ -7,7 +7,7 @@ spring.application.name: notification-service
 
 logging:
   level:
-    root: INFO
+    root: DEBUG
     org.springframework.web: DEBUG
     org.springframework.web.HttpLogging: DEBUG
     org.springframework.security: DEBUG

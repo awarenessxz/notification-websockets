@@ -26,3 +26,13 @@ to frontend via websocket.
    cd spring-microservice
    ./gradlew bootrun
    ```
+
+## Custom Topics
+
+To send custom messages, you will have to add a new topic. 
+
+
+## References
+
+- [Using Stompjs V5](https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html)
+
