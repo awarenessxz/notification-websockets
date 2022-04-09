@@ -2,8 +2,8 @@ package com.example.notification.controller
 
 import com.example.notification.enum.ToFrontendTopic
 import com.example.notification.enum.ToBackendTopic
+import com.example.notification.model.NewMessageRequest
 import com.example.notification.model.PubSubEvent
-import com.example.notification.model.WebsocketMessage
 import com.example.notification.model.TopicResponse
 import com.example.notification.service.RedisService
 import org.springframework.http.HttpStatus
@@ -24,9 +24,9 @@ class NotificationController(private val redisService: RedisService) {
     }
 
     @PostMapping
-    fun newTopicMessage(@RequestBody message: WebsocketMessage) {
+    fun newMessage(@RequestBody message: NewMessageRequest) {
         if (ToBackendTopic.isValidTopic(message.topic)) {
-            redisService.publish(PubSubEvent("backend", message.topic, message.message))
+            redisService.publish(PubSubEvent(message.topic, message.message))
         }
         throw IllegalArgumentException("Invalid Topic!!")
     }

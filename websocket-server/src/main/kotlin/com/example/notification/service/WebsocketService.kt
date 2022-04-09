@@ -1,20 +1,17 @@
 package com.example.notification.service
 
-import com.example.notification.enum.ToFrontendTopic
-import com.example.notification.enum.ToBackendTopic
-import com.example.notification.model.WebsocketMessage
+import org.slf4j.LoggerFactory
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Service
 
 @Service
 class WebsocketService(private val template: SimpMessagingTemplate) {
-    fun sendToFrontendClient(topic: ToFrontendTopic, message: String) {
-        val payload = WebsocketMessage(topic.destination, message)
-        template.convertAndSend(payload.topic, payload.message)
+    companion object {
+        private val logger = LoggerFactory.getLogger(WebsocketService::class.java)
     }
 
-    fun sendToBackendClient(topic: ToBackendTopic, message: String) {
-        val payload = WebsocketMessage(topic.destination, message)
-        template.convertAndSend(payload.topic, payload.message)
+    fun sendToClient(destination: String, message: String) {
+        logger.debug("Sending to Websocket OutboundClientChannel: $destination - $message")
+        template.convertAndSend(destination, message)
     }
 }

@@ -41,6 +41,7 @@ export const WebsocketProvider: React.FC = ({ children }) => {
                     toast("Notify me");
                 });
             });
+            stompClient.publish({ destination: "/server/test", body: "Testing 123!"});
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWebSocketConnected, stompClient, dispatch]);

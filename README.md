@@ -67,6 +67,7 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 ## References
 
 - [Using Stompjs V5](https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html)
+- [Toptal: Using Spring Boot for Websocket Implementation with STOMP](https://www.toptal.com/java/stomp-spring-boot-websocket)
 - [Building Scalable Facebook like Notification with Server Sent Events and Redis](https://medium.com/javarevisited/building-scalable-facebook-like-notification-using-server-sent-event-and-redis-9d0944dee618)
 - [Spring Boot Redis Pub/Sub](https://www.vinsguru.com/redis-pubsub-spring-boot/)
 - [Pub/Sub Messaging with Spring Boot](https://www.baeldung.com/spring-data-redis-pub-sub)

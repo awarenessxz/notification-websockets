@@ -1,7 +1,5 @@
 package com.example.notification.service
 
-import com.example.notification.enum.ToFrontendTopic
-import com.example.notification.enum.ToBackendTopic
 import com.example.notification.model.PubSubEvent
 import org.slf4j.LoggerFactory
 import org.springframework.data.redis.connection.ReactiveSubscription
@@ -21,7 +19,7 @@ class RedisService(
     }
 
     fun publish(event: PubSubEvent) {
-        logger.info("Publishing to Redis Topic '$channel'...")
+        logger.debug("Publishing to Redis Topic '$channel'...")
         redisTemplate.convertAndSend(channel, event).subscribe()
     }
 
@@ -31,12 +29,8 @@ class RedisService(
         redisTemplate.listenTo(ChannelTopic.of(channel))
             .map(ReactiveSubscription.Message<String, PubSubEvent>::getMessage)
             .subscribe {
-                logger.info("Receiving --> $it")
-                when (it.origin) {
-                    "frontend" -> websocketService.sendToBackendClient(ToBackendTopic.valueOf(it.topic), it.message)
-                    "backend" -> websocketService.sendToFrontendClient(ToFrontendTopic.valueOf(it.topic), it.message)
-                    else -> throw IllegalArgumentException("Receiving Message of Unknown Origin!!")
-                }
+                logger.debug("Receiving Redis Subscription --> $it")
+                websocketService.sendToClient(it.destination, it.message)
             }
     }
 }

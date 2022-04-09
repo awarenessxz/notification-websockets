@@ -18,13 +18,13 @@ import org.springframework.scheduling.annotation.Scheduled
 class SchedulerConfig(private val websocketService: WebsocketService, private val redisService: RedisService) {
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendMessage() {
-        websocketService.sendToFrontendClient(ToFrontendTopic.TOAST_MESSAGE, "Mock Message")
-        websocketService.sendToBackendClient(ToBackendTopic.NA, "Mock Message")
+        websocketService.sendToClient(ToFrontendTopic.TOAST_MESSAGE.destination, "Mock Message")
+        websocketService.sendToClient(ToBackendTopic.NA.destination, "Mock Message")
     }
 
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendToServer() {
-        redisService.publish(PubSubEvent("backend", ToFrontendTopic.TOAST_MESSAGE.name, "Testing Message"))
-        //redisService.publish(PubSubEvent("frontend", ToServerTopic.NA.name, "Testing Message"))
+        redisService.publish(PubSubEvent(ToFrontendTopic.TOAST_MESSAGE.name, "Testing Message"))
+        //redisService.publish(PubSubEvent(ToServerTopic.NA.name, "Testing Message"))
     }
 }

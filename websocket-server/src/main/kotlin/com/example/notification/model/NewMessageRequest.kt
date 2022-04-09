@@ -1,6 +1,6 @@
 package com.example.notification.model
 
-data class WebsocketMessage (
+data class NewMessageRequest(
     val topic: String,
     val message: String
 )
