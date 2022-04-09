@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.*
 class NotificationController(private val redisService: RedisService) {
     @GetMapping("/topics")
     fun getAllTopics(): ResponseEntity<TopicResponse> {
-        val response = TopicResponse(toClientTopics = ToFrontendTopic.getTopics(), toServerTopics = ToBackendTopic.getTopics())
+        val response = TopicResponse(ToFrontendTopic.getTopics(), ToBackendTopic.getTopics())
         return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
     fun newTopicMessage(@RequestBody message: WebsocketMessage) {
         if (ToBackendTopic.isValidTopic(message.topic)) {
-            redisService.publish(PubSubEvent("frontend", message.topic, message.message))
+            redisService.publish(PubSubEvent("backend", message.topic, message.message))
         }
         throw IllegalArgumentException("Invalid Topic!!")
     }
