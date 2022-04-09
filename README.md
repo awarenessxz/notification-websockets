@@ -46,14 +46,19 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 
 ## Getting Started
 
-1. Start Frontend
+1. Start Redis
+   ```bash
+   sudo docker run --name redis -p 6379:6379 -d redis:6.2.6
+   ```
+
+2. Start Frontend
    ```bash
    cd react-app
    npm install
    npm start
    ```
    
-2. Start Backend
+3. Start Backend
    ```bash
    cd spring-microservice
    ./gradlew bootrun
@@ -63,4 +68,5 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 
 - [Using Stompjs V5](https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html)
 - [Building Scalable Facebook like Notification with Server Sent Events and Redis](https://medium.com/javarevisited/building-scalable-facebook-like-notification-using-server-sent-event-and-redis-9d0944dee618)
-
+- [Spring Boot Redis Pub/Sub](https://www.vinsguru.com/redis-pubsub-spring-boot/)
+- [Pub/Sub Messaging with Spring Boot](https://www.baeldung.com/spring-data-redis-pub-sub)
