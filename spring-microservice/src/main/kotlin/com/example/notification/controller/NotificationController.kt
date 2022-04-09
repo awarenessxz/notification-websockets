@@ -1,29 +1,33 @@
 package com.example.notification.controller
 
-import com.example.notification.enum.ToClientTopic
-import com.example.notification.enum.ToServerTopic
-import com.example.notification.model.ToClientMessage
+import com.example.notification.enum.ToFrontendTopic
+import com.example.notification.enum.ToBackendTopic
+import com.example.notification.model.PubSubEvent
+import com.example.notification.model.WebsocketMessage
 import com.example.notification.model.TopicResponse
+import com.example.notification.service.RedisService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 
 /**
- * Controller for handling external service notification to frontend using backend as a proxy
+ * Controller for handling external backend service's notification to frontend using websocket server as a proxy
  **/
 
 @RestController
 @RequestMapping("/api/notification")
-class NotificationController(private val template: SimpMessagingTemplate) {
+class NotificationController(private val redisService: RedisService) {
     @GetMapping("/topics")
     fun getAllTopics(): ResponseEntity<TopicResponse> {
-        val response = TopicResponse(toClientTopics = ToClientTopic.getTopics(), toServerTopics = ToServerTopic.getTopics())
+        val response = TopicResponse(toClientTopics = ToFrontendTopic.getTopics(), toServerTopics = ToBackendTopic.getTopics())
         return ResponseEntity(response, HttpStatus.OK)
     }
 
     @PostMapping
-    fun newTopicMessage(@RequestBody message: ToClientMessage) {
-        template.convertAndSend(message.topic.destination, message.payload)
+    fun newTopicMessage(@RequestBody message: WebsocketMessage) {
+        if (ToBackendTopic.isValidTopic(message.topic)) {
+            redisService.publish(PubSubEvent("frontend", message.topic, message.message))
+        }
+        throw IllegalArgumentException("Invalid Topic!!")
     }
 }

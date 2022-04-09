@@ -5,15 +5,23 @@
 server.port: 8080
 spring.application.name: notification-service
 
+
 logging:
   level:
-    root: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.web.HttpLogging: DEBUG
-    org.springframework.security: DEBUG
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.web.HttpLogging: INFO
+    org.springframework.security: INFO
 
 management:
   endpoints:
     enabled-by-default: true
     web.exposure.include: "*"
   endpoint.info.enabled: true
+
+spring:
+  redis:
+    host: localhost   # Redis Server Host
+    port: 6379        # Redis Server Port
+    ssl: false        # Enable SSL support
+    database: 0       # database index
