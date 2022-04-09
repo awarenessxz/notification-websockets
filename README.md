@@ -58,10 +58,10 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
    npm start
    ```
    
-3. Start Backend
+3. Start Websocket Server
    ```bash
-   cd spring-microservice
-   ./gradlew bootrun
+   cd websocket-server
+   ../gradlew bootrun
    ```
 
 ## References
