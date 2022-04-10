@@ -19,12 +19,12 @@ class SchedulerConfig(private val websocketService: WebsocketService, private va
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendMessage() {
         websocketService.sendToClient(ToFrontendTopic.TOAST_MESSAGE.destination, "Mock Message")
-        websocketService.sendToClient(ToBackendTopic.NA.destination, "Mock Message")
+        websocketService.sendToClient(ToBackendTopic.GREETINGS.destination, "Mock Message")
     }
 
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendToServer() {
-        redisService.publish(PubSubEvent(ToFrontendTopic.TOAST_MESSAGE.name, "Testing Message"))
-        //redisService.publish(PubSubEvent(ToServerTopic.NA.name, "Testing Message"))
+        redisService.publish(PubSubEvent(ToFrontendTopic.TOAST_MESSAGE.destination, "Testing Message"))
+        redisService.publish(PubSubEvent(ToBackendTopic.GREETINGS.destination, "Testing Message"))
     }
 }

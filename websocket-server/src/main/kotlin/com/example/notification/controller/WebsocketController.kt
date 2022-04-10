@@ -17,5 +17,6 @@ class WebsocketController(private val redisService: RedisService) {
     @MessageMapping("/test")
     fun broadcastTestMessage(@Payload message: String) {
         redisService.publish(PubSubEvent(ToFrontendTopic.TOAST_MESSAGE.destination, message))
+        redisService.publish(PubSubEvent(ToBackendTopic.GREETINGS.destination, message))
     }
 }

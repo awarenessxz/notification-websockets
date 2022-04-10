@@ -5,6 +5,9 @@
 server.port: 8090
 spring.application.name: backend-service
 
+websocket-client:
+  broker-url: ws://localhost:8080/stomp
+  inbound-topics: "/topic/greetings"
 
 logging:
   level:
