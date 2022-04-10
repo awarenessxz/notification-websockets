@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.example.notification.websocket.StompClientAutoConfiguration,\
+  com.example.notification.websocket.WebsocketServiceAutoConfiguration

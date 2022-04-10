@@ -16,12 +16,8 @@ repositories {
 }
 
 dependencies {
-	// Starter Library
-	implementation(project(":websocket-client-starter"))
-
 	// Spring Boot
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.boot:spring-boot-starter-websocket")
 
 	// Kotlin
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -30,7 +26,6 @@ dependencies {
 
 	// Testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks.withType<KotlinCompile> {

@@ -50,21 +50,27 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
    ```bash
    sudo docker run --name redis -p 6379:6379 -d redis:6.2.6
    ```
-
-2. Start Frontend
-   ```bash
-   cd react-app
-   npm install
-   npm start
-   ```
    
-3. Start Websocket Server
+2. Start Websocket Server
    ```bash
    cd websocket-server
    ../gradlew bootrun
    ```
 
-## References
+3. Start Frontend
+   ```bash
+   cd react-app
+   npm install
+   npm start
+   ```
+
+4. Start the Sample Backend Service
+   ```bash
+   cd sample-backend-service
+   ../gradlew bootrun
+   ```
+
+## References & Credits
 
 - [Using Stompjs V5](https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html)
 - [Toptal: Using Spring Boot for Websocket Implementation with STOMP](https://www.toptal.com/java/stomp-spring-boot-websocket)
@@ -73,3 +79,5 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 - [Vinsguru: Spring Boot Redis Pub/Sub](https://www.vinsguru.com/redis-pubsub-spring-boot/)
 - [Baeldung: Pub/Sub Messaging with Spring Boot](https://www.baeldung.com/spring-data-redis-pub-sub)
 - [Baeldung: Java Spring Client for Websocket APIs](https://www.baeldung.com/websockets-api-java-spring-client)
+- [Baeldung: Creating a Custom Starter Library with Spring Boot](https://www.baeldung.com/spring-boot-custom-starter)
+- [TowardsDataScience: Guide to use Spring Boot ConfigurationProperties Annotations in Kotlin Data Class](https://towardsdatascience.com/a-guide-to-use-spring-boots-configurationproperties-annotation-in-kotlin-s-dataclass-1341c63110f4)

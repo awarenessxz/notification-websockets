@@ -1,20 +1,16 @@
 package com.example.notification.websocket
 
 import org.slf4j.LoggerFactory
-import org.springframework.messaging.simp.stomp.StompCommand
-import org.springframework.messaging.simp.stomp.StompHeaders
-import org.springframework.messaging.simp.stomp.StompSession
-import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter
+import org.springframework.messaging.simp.stomp.*
 
-class ClientStompSessionHandler(private val websocketService: WebsocketService): StompSessionHandlerAdapter() {
+class ClientStompSessionHandler(private val websocketService: AbstractWebsocketService): StompSessionHandlerAdapter() {
     companion object {
         private val logger = LoggerFactory.getLogger(ClientStompSessionHandler::class.java)
     }
 
     override fun afterConnected(session: StompSession, connectedHeaders: StompHeaders) {
         logger.info("New session established : " + session.sessionId)
-        websocketService.stompSession = session
-        websocketService.subscribeAllTopics(this)
+        websocketService.initWebsocketSession(session, this)
     }
 
     override fun handleException(session: StompSession, command: StompCommand?, headers: StompHeaders, payload: ByteArray, exception: Throwable) {
