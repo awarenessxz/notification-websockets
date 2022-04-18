@@ -13,8 +13,10 @@ websocket-client:
     - "/server/test"
 
 redis-client:
-  outbound-topics: "TOAST_MESSAGE"
-  inbound-topics: "GREETINGS"
+  outbound-topics:
+    - "TOAST_MESSAGE"
+  inbound-topics:
+    - "GREETINGS"
 
 logging:
   level:
@@ -22,6 +24,7 @@ logging:
     org.springframework.web: INFO
     org.springframework.web.HttpLogging: INFO
     org.springframework.security: INFO
+    com.example.notification: DEBUG
 
 management:
   endpoints:

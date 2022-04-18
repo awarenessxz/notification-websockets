@@ -15,5 +15,20 @@ This starter library contains the implementation of spring boot websocket stomp 
    ```yaml
    websocket-client:
        broker-url: ws://localhost:8080/stomp
-       inbound-topics: "/topic/greetings"
+       inbound-topics: 
+         - "/topic/greetings"
+       outbound-topics: 
+         - "/server/test"
    ```
+
+3. Create Websocket Service
+ 
+    ```kotlin
+    @Service
+    class WebsocketService(websocketClientProperties: WebsocketClientProperties): AbstractWebsocketService(websocketClientProperties) {
+        override fun processReceivedMessage(destination: String, message: String) {
+            logger.info("Processing websocket message - destination: $destination, message: $message")
+        }
+    }
+    ```
+

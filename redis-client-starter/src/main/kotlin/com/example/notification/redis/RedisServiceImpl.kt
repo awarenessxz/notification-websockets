@@ -1,16 +1,14 @@
-package com.example.notification.service
+package com.example.notification.redis
 
-import com.example.notification.redis.AbstractRedisService
-import com.example.notification.redis.RedisClientProperties
 import org.springframework.data.redis.core.ReactiveRedisTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class RedisService(
+class RedisServiceImpl(
     reactiveRedisTemplate: ReactiveRedisTemplate<String, String>,
-    redisClientProperties: RedisClientProperties
+    redisClientProperties: RedisClientProperties,
 ): AbstractRedisService(reactiveRedisTemplate, redisClientProperties) {
     override fun processReceivedMessage(topic: String, message: String) {
-        logger.info("Processing redis event - topic: $topic, message: $message")
+        logger.error("Please implement your own redisService to process the received message!")
     }
 }
