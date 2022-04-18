@@ -9,6 +9,12 @@ websocket-client:
   broker-url: ws://localhost:8080/stomp
   inbound-topics:
     - "/topic/greetings"
+  outbound-topics:
+    - "/server/test"
+
+redis-client:
+  outbound-topics: "TOAST_MESSAGE"
+  inbound-topics: "GREETINGS"
 
 logging:
   level:
@@ -22,3 +28,10 @@ management:
     enabled-by-default: true
     web.exposure.include: "*"
   endpoint.info.enabled: true
+
+spring:
+  redis:
+    host: localhost   # Redis Server Host
+    port: 6379        # Redis Server Port
+    ssl: false        # Enable SSL support
+    database: 0       # database index

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class WebsocketService(websocketClientProperties: WebsocketClientProperties): AbstractWebsocketService(websocketClientProperties) {
     override fun processReceivedMessage(destination: String, message: String) {
-        logger.info("Processing message: $message, destination: $destination")
+        logger.info("Processing websocket message - destination: $destination, message: $message")
     }
 }

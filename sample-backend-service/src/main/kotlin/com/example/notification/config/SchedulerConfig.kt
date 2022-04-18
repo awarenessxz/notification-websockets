@@ -1,6 +1,9 @@
 package com.example.notification.config
 
+import com.example.notification.service.RedisService
+import com.example.notification.websocket.WebsocketClientProperties
 import com.example.notification.websocket.WebsocketServiceImpl
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
@@ -11,9 +14,19 @@ import org.springframework.scheduling.annotation.Scheduled
 
 @Configuration
 @EnableScheduling
-class SchedulerConfig(private val websocketService: WebsocketServiceImpl) {
+class SchedulerConfig(
+    private val websocketClientProperties: WebsocketClientProperties,
+    private val websocketService: WebsocketServiceImpl,
+    private val redisService: RedisService,
+    @Value("\${redis-client.outbound-topics}") private val outboundTopics: List<String>,
+) {
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendToServer() {
-        websocketService.publishMessage("/server/test", "From Backend Service (Hello)")
+        websocketClientProperties.outboundTopics?.forEach { topic ->
+            websocketService.publishMessage(topic, "From Backend Service (Hello)")
+        }
+        outboundTopics.forEach { topic ->
+            redisService.publish(topic, "From Backend Service (Hello)")
+        }
     }
 }

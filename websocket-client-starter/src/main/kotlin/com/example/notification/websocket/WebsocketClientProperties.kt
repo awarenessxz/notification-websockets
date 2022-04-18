@@ -7,5 +7,6 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConfigurationProperties(prefix = "websocket-client")
 data class WebsocketClientProperties(
     val brokerUrl: String,
-    val inboundTopics: List<String>
+    val inboundTopics: List<String>? = listOf(),
+    val outboundTopics: List<String>? = listOf()
 )

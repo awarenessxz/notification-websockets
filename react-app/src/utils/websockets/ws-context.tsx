@@ -38,7 +38,7 @@ export const WebsocketProvider: React.FC = ({ children }) => {
             Object.values(WebsocketTopic).forEach((topic) => {
                 stompClient.subscribe(topic, (message: Message) => {
                     dispatchNewTopicMessage(dispatch, topic, message);
-                    toast("Notify me");
+                    toast(message.body);
                 });
             });
             stompClient.publish({ destination: "/server/test", body: "Testing 123!"});

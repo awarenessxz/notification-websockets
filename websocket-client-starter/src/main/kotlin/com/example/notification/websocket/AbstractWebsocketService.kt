@@ -18,7 +18,7 @@ abstract class AbstractWebsocketService(
 
     private fun subscribeAllTopics(handler: StompFrameHandler) {
         logger.info("Subscribing to all inbound topics")
-        websocketClientProperties.inboundTopics.forEach { topic ->
+        websocketClientProperties.inboundTopics?.forEach { topic ->
             logger.info("Subscribing to $topic...")
             stompSession?.subscribe(topic, handler)
         }
@@ -39,7 +39,7 @@ abstract class AbstractWebsocketService(
     }
 
     fun receivedMessage(destination: String?, message: String) {
-        if (websocketClientProperties.inboundTopics.contains(destination)) {
+        if (websocketClientProperties.inboundTopics!!.contains(destination)) {
             logger.info("Received message: $message from destination: $destination")
             processReceivedMessage(destination!!, message)
         } else {

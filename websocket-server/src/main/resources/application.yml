@@ -12,6 +12,7 @@ logging:
     org.springframework.web: INFO
     org.springframework.web.HttpLogging: INFO
     org.springframework.security: INFO
+    com.example.notification: DEBUG
 
 management:
   endpoints:

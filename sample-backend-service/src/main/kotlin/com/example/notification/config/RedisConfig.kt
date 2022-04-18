@@ -1,6 +1,5 @@
 package com.example.notification.config
 
-import com.example.notification.model.BroadcastEvent
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.ReactiveKeyCommands
@@ -14,14 +13,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
 class RedisConfig {
-    @Bean
-    fun broadcastRedisTemplate(factory: LettuceConnectionFactory): ReactiveRedisTemplate<String, BroadcastEvent> {
-        val serializer = Jackson2JsonRedisSerializer(BroadcastEvent::class.java)
-        val builder = RedisSerializationContext.newSerializationContext<String, BroadcastEvent>(StringRedisSerializer())
-        val context = builder.value(serializer).build()
-        return ReactiveRedisTemplate(factory, context)
-    }
-
     @Bean
     fun reactiveRedisTemplate(factory: LettuceConnectionFactory): ReactiveRedisTemplate<String, String> {
         val serializer = Jackson2JsonRedisSerializer(String::class.java)

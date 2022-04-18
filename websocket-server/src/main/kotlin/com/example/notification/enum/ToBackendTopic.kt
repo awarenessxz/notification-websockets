@@ -3,7 +3,7 @@ package com.example.notification.enum
 import com.example.notification.constant.TopicConstants
 
 /*
- * Topics from Frontend to Backend
+ * Topics from Frontend (proxy via websocket server) to Backend
  */
 
 enum class ToBackendTopic(val destination: String) {

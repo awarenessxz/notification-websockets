@@ -2,7 +2,6 @@ package com.example.notification.config
 
 import com.example.notification.enum.ToFrontendTopic
 import com.example.notification.enum.ToBackendTopic
-import com.example.notification.model.PubSubEvent
 import com.example.notification.service.RedisService
 import com.example.notification.service.WebsocketService
 import org.springframework.context.annotation.Configuration
@@ -24,7 +23,7 @@ class SchedulerConfig(private val websocketService: WebsocketService, private va
 
     @Scheduled(fixedRate = 60000) // every 1 minute
     fun sendToServer() {
-        redisService.publish(PubSubEvent(ToFrontendTopic.TOAST_MESSAGE.destination, "Testing Message"))
-        redisService.publish(PubSubEvent(ToBackendTopic.GREETINGS.destination, "Testing Message"))
+        redisService.publish(ToFrontendTopic.TOAST_MESSAGE.name, "Testing Message")
+        redisService.publish(ToBackendTopic.GREETINGS.name, "Testing Message")
     }
 }
