@@ -4,7 +4,7 @@ import { useWebsocketContext } from "./WebSocketProvider";
 
 export type StompOnReceivedCallback = (message: string) => void;
 
-const UseStompSubscribe = (topic: string, onRecieved: StompOnReceivedCallback): void => {
+const useStompSubscribe = (topic: string, onRecieved: StompOnReceivedCallback): void => {
   const wsContext = useWebsocketContext();
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const UseStompSubscribe = (topic: string, onRecieved: StompOnReceivedCallback): 
   }, [wsContext, topic, onRecieved]);
 };
 
-export default UseStompSubscribe;
+export default useStompSubscribe;

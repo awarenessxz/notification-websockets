@@ -3,7 +3,7 @@ import { useWebsocketContext } from "./WebSocketProvider";
 
 export type StompPublishCallback = (message: string) => void;
 
-const UseStompPubish = (topic: string): StompPublishCallback => {
+const useStompPubish = (topic: string): StompPublishCallback => {
   const wsContext = useWebsocketContext();
 
   const publishMessage = (message: string) => {
@@ -16,4 +16,4 @@ const UseStompPubish = (topic: string): StompPublishCallback => {
   return publishMessage;
 };
 
-export default UseStompPubish;
+export default useStompPubish;
