@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Client, Frame, StompConfig } from '@stomp/stompjs';
 
-interface UseStompWebSocketProps {
+export interface UseStompWebSocketProps {
     socketPath: string
     authenticationToken?: string | null,
     requiresAuth?: boolean,
     reconnectDelay?: number,
 }
 
-interface UseStompWebSocketState {
+export interface UseStompWebSocketState {
     stompClient: Client | null,
     isWebSocketConnected: boolean
 }
