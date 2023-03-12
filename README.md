@@ -95,7 +95,7 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 - [Using Stompjs V5](https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html)
 - [Toptal: Using Spring Boot for Websocket Implementation with STOMP](https://www.toptal.com/java/stomp-spring-boot-websocket)
 - [Medium: Building Scalable Facebook like Notification with Server Sent Events and Redis](https://medium.com/javarevisited/building-scalable-facebook-like-notification-using-server-sent-event-and-redis-9d0944dee618)
-- [Medium: Websockets with Sprting, Part3: STOMP Over Websocket](https://medium.com/swlh/websockets-with-spring-part-3-stomp-over-websocket-3dab4a21f397)
+- [Medium: Websockets with Spring, Part3: STOMP Over Websocket](https://medium.com/swlh/websockets-with-spring-part-3-stomp-over-websocket-3dab4a21f397)
 - [Vinsguru: Spring Boot Redis Pub/Sub](https://www.vinsguru.com/redis-pubsub-spring-boot/)
 - [Baeldung: Pub/Sub Messaging with Spring Boot](https://www.baeldung.com/spring-data-redis-pub-sub)
 - [Baeldung: Java Spring Client for Websocket APIs](https://www.baeldung.com/websockets-api-java-spring-client)
