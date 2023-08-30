@@ -66,6 +66,8 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
 
 ## Getting Started
 
+### Version 1: Redis + WebSocket
+
 1. Start Redis
    ```bash
    sudo docker run --name redis -p 6379:6379 -d redis:6.2.6
@@ -88,6 +90,40 @@ to the connected frontend client. In our set up below, we make use of Redis Pub/
    ```bash
    cd sample-backend-service
    ../gradlew bootrun
+   ```
+
+### Version 2: WebSocket with RabbitMQ Stomp Broker
+
+1. Start RabbitMQ
+   ```bash
+   # Default Username & Password = guest
+   sudo docker run --name rabbitmq -p 15672:15672 -p 5672:5672 -p 61613:61613 -d rabbitmq:3.11.3-management
+   
+   # Enable Stomp Plugin
+   docker exec -it rabbitmq /bin/bash
+   rabbitmq-plugins enable rabbitmq_stomp
+   ```
+
+2. Start Websocket Server
+   ```bash
+   # Start First Server
+   gradlew.bat websocket-stomp-server:bootrun -Pargs=--server.port=8080
+   
+   # Start Second Server
+   gradlew.bat websocket-stomp-server:bootrun -Pargs=--server.port=9090
+   ```
+
+3. Start Frontend
+   ```bash
+   cd react-app
+   npm install
+   npm start
+   ```
+
+4. Send Message to Frontend
+   ```bash
+   curl -X POST -d "Hello World" localhost:8080
+   curl -X POST -d "Hello World" localhost:9090
    ```
 
 ## References & Credits
